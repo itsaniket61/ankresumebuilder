@@ -50,7 +50,7 @@ function decrypt(encryptedText) {
 }
 
 function getBlobCode(stream, contentType) {
-  const expirationSeconds = process.env.blobExpiry||10;
+  const expirationSeconds = process.env.BLOB_EXPIRY||10;
   const uniqueIdentifier = Date.now().toString();
   let filePath = process.cwd()+`/blobTemp`;
   if(!fs.existsSync(filePath)) fs.mkdirSync(filePath);
