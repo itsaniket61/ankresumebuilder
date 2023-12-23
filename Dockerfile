@@ -5,7 +5,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Copy both package.json and package-lock.json (if exists)
-COPY package*.json ./
+COPY package.json ./
 
 RUN npm install -g npm@latest
 
