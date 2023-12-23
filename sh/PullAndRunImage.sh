@@ -1,5 +1,5 @@
 #!/bin/bash
-exho "Enter Docker Username : "
+echo "Enter Docker Username : "
 read DOCKER_USERNAME
 
 echo "Enter Docker Password : "
