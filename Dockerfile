@@ -7,14 +7,10 @@ WORKDIR /app
 # Copy both package.json and package-lock.json (if exists)
 COPY package*.json ./
 
-RUN npm install -g npm@latest
-
-RUN npm cache clean --force
+RUN RUN npm cache clean --force
 
 # Install dependencies
 RUN npm install
-
-RUN npm install --save autoprefixer
 
 # Copy the rest of the application code
 COPY . .
