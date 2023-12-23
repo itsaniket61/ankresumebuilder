@@ -33,26 +33,3 @@ jobs:
       - name: 🚀 Push Docker image with latest tag to registry
         if: success() && github.event_name == 'push'
         run: docker push ${{ secrets.DOCKER_USERNAME }}/ank-resume-builder:latest
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: 🔄 Checkout code for deployment
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.before }}
-
-      - name: 📂 Print Current Directory
-        run: pwd
-
-      - name: 📂 List Files in Directory
-        run: ls -la
-
-      - name: 🔄 Install Docker Compose
-        run: |
-          sudo apt-get update -q
-          sudo apt-get install -q -y docker-compose
-
-      - name: 🚢 Deploy with Docker Compose
-        run: docker-compose -f docker-compose.yml up -d
