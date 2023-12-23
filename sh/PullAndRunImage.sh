@@ -1,16 +1,19 @@
 #!/bin/bash
+exho "Enter Docker Username : "
+read DOCKER_USERNAME
 
-export DOCKER_USERNAME=itsaniket61
+echo "Enter Docker Password : "
+read -s DOCKER_PASSWORD
 
-export DOCKER_PASSWORD=SLN7yybK.kwB#9v
+echo "Enter Image Name : "
+read DOCKER_IMAGE_NAME
 
-export DOCKER_IMAGE_NAME=ank-resume-builder
-
-export DOCKER_IMAGE_TAG=latest
+echo "Enter Image Tag : "
+read DOCKER_IMAGE_TAG
 
 sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-sudo docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME
+sudo docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
 
 sudo docker run -d \
                 -e "AI_API_KEY=AIzaSyAb-Ce0fzOjT5WmipYQ1rzkmUFqTTxL-Dw" \
@@ -20,4 +23,4 @@ sudo docker run -d \
                 -e "MAX_AI_LENGTH=500" \
                 -e "BLOB_EXPIRY=60"\
                 -p 3000:3000 \
-                $DOCKER_USERNAME/$DOCKER_IMAGE_NAME
+                $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
