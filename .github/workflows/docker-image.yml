@@ -1,4 +1,4 @@
-name: Docker ANK Resume Builder Image CI/CD
+name: Docker ANK Resume Builder Image CI/CD Dev
 
 on:
   push:
