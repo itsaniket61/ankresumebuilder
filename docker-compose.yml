@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  ank-resume-builder:
+    container_name: ankresumebuider
+    image: itsaniket61/ank-resume-builder:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - AI_API_KEY=AIzaSyAb-Ce0fzOjT5WmipYQ1rzkmUFqTTxL-Dw
+      - ACTIVE_PROFILE=prod
+      - SECRET_KEY=Pta-nhii-yrr
+      - HOST_URL=http://ankresumebuider:3000
+      - MAX_AI_LENGTH=500
+    restart: always

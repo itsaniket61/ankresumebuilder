@@ -1,0 +1,13 @@
+# .gitignore
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore the .next directory
+.next/
+
+# Ignore the temp directory
+temp/
+
+# Ignore the outputs directory
+outputs/
