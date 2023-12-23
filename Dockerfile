@@ -14,6 +14,8 @@ RUN npm cache clean --force
 # Install dependencies
 RUN npm install
 
+RUN npm install --save autoprefixer
+
 # Copy the rest of the application code
 COPY . .
 
