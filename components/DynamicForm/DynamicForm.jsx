@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-function DynamicForm({ jsonData, submitForm }) {
+function DynamicForm({ jsonData, onChange }) {
   const [formData, setFormData] = useState(jsonData);
+
+  useEffect(()=>{
+    onChange(formData||jsonData);
+    console.log(formData,jsonData);
+  },[]);
 
   const renderFormFields = (data, arrayIndex = '', arrayAttribute = '') => {
     return Object.keys(data).map((key, index) => {
@@ -60,17 +65,14 @@ function DynamicForm({ jsonData, submitForm }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
-    submitForm(formData);
+    onChange(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onChange={handleChange}>
       {renderFormFields(jsonData)}
-      <button type="submit" className="bg-gray-900 p-3 rounded-3xl w-full text-gray-50 border border-blue-300 w-36 font-bold">
-        Submit
-      </button>
     </form>
   );
 }

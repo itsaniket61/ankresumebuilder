@@ -4,11 +4,18 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-# Copy the entire local project directory into the Docker image
+# Copy both package.json and package-lock.json (if exists)
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
 
-# Expose the port your app runs on
 EXPOSE 3000
 
-# Start your application
-CMD npm run dev
+# Build the application (if needed)
+RUN npm run build
+
+CMD npm run start
