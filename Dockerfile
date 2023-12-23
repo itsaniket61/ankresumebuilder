@@ -9,7 +9,7 @@ COPY package*.json ./
 
 RUN npm install -g npm@latest
 
-RUN RUN npm cache clean --force
+RUN npm cache clean --force
 
 # Install dependencies
 RUN npm install
