@@ -56,6 +56,3 @@ jobs:
 
       - name: 🚢 Deploy with Docker Compose
         run: docker-compose -f docker-compose.yml up -d
-
-      - name: 📡 Get Public IP
-        run: echo "Public IP: $(curl -s https://api.ipify.org?format=json | jq -r '.ip')"
