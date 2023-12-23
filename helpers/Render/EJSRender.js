@@ -7,7 +7,7 @@ export default function renderEjsFile(filePath, data) {
     try {
     const templateName = filePath.substring(filePath.lastIndexOf('/')+1,filePath.length); 
     // Read EJS template content from file
-    const templateContent = fs.readFileSync(process.cwd()+'/templates/'+templateName+'/index.ejs', 'utf-8');
+    const templateContent = fs.readFileSync(process.cwd()+'/public/templates/'+templateName+'/index.ejs', 'utf-8');
     logger.info("Template loaded sucessfully!!");
     // Render the template with dynamic data
     const renderedOutput = ejs.render(templateContent, { data });

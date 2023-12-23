@@ -8,7 +8,7 @@ export const POST = async(request)=>{
     const logger = new CustomLogger();
     try {
         const {template,data} = await request.json();
-        const html = renderEjsFile(process.cwd()+"/templates/"+template,data);
+        const html = renderEjsFile(process.cwd()+"/public/templates/"+template,data);
         logger.debug(html);
         const blobCode = await generatePDF(html,'output.pdf');
         logger.debug(`Blob generated is ${blobCode}`);

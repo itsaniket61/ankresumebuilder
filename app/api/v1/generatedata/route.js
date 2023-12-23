@@ -11,7 +11,7 @@ export const GET=async(request)=>{
     const additionalInfo = description;
 
     //Read Sample JSON Data
-    const sampleJsonFilePath = process.cwd()+'/templates/'+template+'/sample.json';
+    const sampleJsonFilePath = process.cwd()+'/public/templates/'+template+'/sample.json';
     const fileContent = fs.readFileSync(sampleJsonFilePath,'utf-8');
     const sampleJSON = JSON.parse(fileContent);
 

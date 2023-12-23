@@ -22,18 +22,14 @@ const getTemplates = (rootFolderPath)=>{
     for (let index = 0; index < dirs.length; index++) {
         const dir = dirs[index];
 
+        const publicDir = process.cwd()+'/public';
         // Prepare paths of all template dependents
-        let logoPath = process.cwd()+'/templates/'+dir+'/logo.jpg';
-        const sampleJsonPath = process.cwd()+'/templates/'+dir+'/sample.json';
-        const ejsPath = process.cwd()+'/templates/'+dir+'/index.ejs';
+        let logoPath = '/templates/'+dir+'/logo.jpg';
+        const sampleJsonPath = '/templates/'+dir+'/sample.json';
+        const ejsPath = '/templates/'+dir+'/index.ejs';
         
         //Check Weather Logo, Samole Data and EJS is presenr
-        if(fs.existsSync(logoPath) && fs.existsSync(sampleJsonPath) && fs.existsSync(ejsPath)){
-            //Convert Image Path to Base64 Data 
-            const imgExt = logoPath.substring(logoPath.lastIndexOf("."),logoPath.length);
-            const base64Data = getImageBase64(logoPath);
-            logoPath = `data:${imgExt};base64,${base64Data}`;
-            
+        if(fs.existsSync(publicDir+logoPath) && fs.existsSync(publicDir+sampleJsonPath) && fs.existsSync(publicDir+ejsPath)){
             //Created Template
             const template = {sampleJsonPath,logoPath,ejsPath};
             template['name'] = dir;
@@ -46,7 +42,7 @@ const getTemplates = (rootFolderPath)=>{
 }
 
 export const GET = (request) =>{
-    const rootFolderPath = process.cwd()+'/templates';
+    const rootFolderPath = process.cwd()+'/public/templates';
     const jsonData = getTemplates(rootFolderPath);   
     return NextResponse.json(jsonData,{status:200});
 }

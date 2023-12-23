@@ -18,27 +18,23 @@ function getImageBase64(filePath) {
   }
 
 const getTemplate = (rootFolderPath,templateName)=>{
-    const dir = rootFolderPath+'/'+templateName;
-
-    // Prepare paths of all template dependents
-    let logoPath = dir+'/logo.jpg';
-    const sampleJsonPath = dir+'/sample.json';
-    const ejsPath = dir+'/index.ejs';
     
-    //Check Weather Logo, Samole Data and EJS is presenr
-    if(fs.existsSync(logoPath) && fs.existsSync(sampleJsonPath) && fs.existsSync(ejsPath)){
-        //Convert Image Path to Base64 Data 
-        const imgExt = logoPath.substring(logoPath.lastIndexOf("."),logoPath.length);
-        const base64Data = getImageBase64(logoPath);
-        logoPath = `data:${imgExt};base64,${base64Data}`;
+    const publicDir = process.cwd()+'/public';
+        // Prepare paths of all template dependents
+    const logoPath = '/templates/'+templateName+'/logo.jpg';
+    const sampleJsonPath = '/templates/'+templateName+'/sample.json';
+    const ejsPath = '/templates/'+templateName+'/index.ejs';
         
-        const sampleJsonDataFileContent = fs.readFileSync(sampleJsonPath,{encoding:'utf-8'});
+    //Check Weather Logo, Samole Data and EJS is presenr
+    if(fs.existsSync(publicDir+logoPath) && fs.existsSync(publicDir+sampleJsonPath) && fs.existsSync(publicDir+ejsPath)){
+        
+      const sampleJsonDataFileContent = fs.readFileSync(publicDir+sampleJsonPath,{encoding:'utf-8'});
 
         const sampleJsonData = JSON.parse(sampleJsonDataFileContent);
 
         //Created Template
         const template = {sampleJsonPath,logoPath,ejsPath,sampleJsonData};
-        template['name'] = dir;
+        template['name'] = templateName;
 
         //Added Template
         return template
@@ -48,7 +44,7 @@ const getTemplate = (rootFolderPath,templateName)=>{
 
 export const GET = (request) =>{
     const {templateName} = getQueryParams(request);
-    const rootFolderPath = process.cwd()+'/templates';
+    const rootFolderPath = process.cwd()+'/public/templates';
     const jsonData = getTemplate(rootFolderPath,templateName);   
     return NextResponse.json(jsonData,{status:200});
 }
