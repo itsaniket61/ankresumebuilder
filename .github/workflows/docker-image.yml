@@ -15,7 +15,7 @@ jobs:
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/ank-resume-builder:latest
 
       - name: 🏗️ Build the Docker image with date tag
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/ank-resume-builder:$(date '+%Y%m%d')
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/ank-resume-builder:dev-$(date '+%Y%m%d')
       
       - name: 🔒 Log in to Docker registry
         if: success() && github.event_name == 'push'
