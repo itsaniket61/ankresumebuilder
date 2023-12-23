@@ -18,5 +18,6 @@ sudo docker run -d \
                 -e "SECRET_KEY=Pta-nhii-yrr" \
                 -e "HOST_URL=https://qt7vdt4g-3000.inc1.devtunnels.ms"\
                 -e "MAX_AI_LENGTH=500" \
+                -e "BLOB_EXPIRY=60"\
                 -p 3000:3000 \
                 $DOCKER_USERNAME/$DOCKER_IMAGE_NAME
