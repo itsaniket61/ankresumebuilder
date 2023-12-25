@@ -2,6 +2,7 @@ import fs from 'fs';
 import multer from 'multer';
 import path from 'path';
 import crypto from 'crypto';
+import { CONSTANTS } from '@/app/variables/Constatnts';
 
 const algorithm = 'aes-256-ctr';
 const secretKey = process.env.SECRET_KEY; 
@@ -50,9 +51,9 @@ function decrypt(encryptedText) {
 }
 
 function getBlobCode(stream, contentType) {
-  const expirationSeconds = process.env.blobExpiry||10;
+  const expirationSeconds = process.env.BLOB_EXPIRY||10;
   const uniqueIdentifier = Date.now().toString();
-  let filePath = process.cwd()+`/blobTemp`;
+  let filePath = CONSTANTS.PATHS.BLOB_TEMP_DIR;
   if(!fs.existsSync(filePath)) fs.mkdirSync(filePath);
   filePath += `/${uniqueIdentifier}.tmp`;
   return new Promise((resolve, reject) => {

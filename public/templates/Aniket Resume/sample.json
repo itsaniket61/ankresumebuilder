@@ -1,0 +1,67 @@
+{
+  "name": "Rahul Patel",
+  "jobTitle": "Front End Developer",
+  "location": "Gujarat",
+  "initials": ["R", "P"],
+  "email": "demo@gmail.com",
+  "phone": "+91(123)456-7890",
+  "summary": "Front-End Developer with proven experience at Netizens Technologies in helping companies create and maintain a better code base for reusability. Passionate about learning and development. Eager to tackle more complex problems and continue to find ways to maximize user efficiency.",
+  "experience": [
+    {
+      "title": "Front End Developer",
+      "years": 2,
+      "date": "April 2021 – April 2023",
+      "company": "ABC Technologies",
+      "responsibilities": [
+        "Create Responsive Site With W3C Standards.",
+        "Crafted literate, Comprehensive Source Code.",
+        "Provided commentary to improve maintainability",
+        "Add Site Base Animation Using Keyframe and SVG Animation"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University Of India",
+      "date": "2017 – 2020",
+      "degree": "Master Of Computer Application",
+      "major": "Computer Science",
+      "cgpa": 5.9
+    }
+  ],
+  "projects": [
+    {
+      "name": "Shipper (Transportation App)",
+      "date": "2017",
+      "technologies": ["Android", "Java", "HTML", "CSS", "PHP"],
+      "description": "Shippers fulfill an important part of the supply chain. Whether by trucking, or freight train, or air, shippers deliver both packages and cost-savings to their dedicated customers."
+    },
+    {
+      "name": "Speech Recognization Application",
+      "date": "2020",
+      "technologies": ["Asp.Net", "HTML", "CSS"],
+      "description": "We are working on an ASP.NET web application which requires the functionality to recognize user’s voice from client side. Is it possible to record this voice and compare it with a predefined text which is in the database at server end, in technology like Asp.net."
+    },
+    {
+      "name": "NGO Website",
+      "date": "2020",
+      "technologies": ["HTML", "CSS", "SCSS", "Javascript", "SQL", "PHP"],
+      "description": "Smile Foundation, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India."
+    }
+  ],
+  "skills": [
+    {
+      "category": "Front-End Developer",
+      "skills": [
+        "HTML5",
+        "CSS3",
+        "SCSS",
+        "Tailwind.css",
+        "Javascript",
+        "PHP",
+        "JQuery",
+        "BOOTSTRAP"
+      ]
+    }
+  ]
+}

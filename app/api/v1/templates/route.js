@@ -1,3 +1,4 @@
+import { CONSTANTS } from "@/app/variables/Constatnts";
 import fs from "fs"
 import { NextResponse } from "next/server";
 
@@ -23,19 +24,18 @@ const getTemplates = (rootFolderPath)=>{
         const dir = dirs[index];
 
         // Prepare paths of all template dependents
-        let logoPath = process.cwd()+'/templates/'+dir+'/logo.jpg';
-        const sampleJsonPath = process.cwd()+'/templates/'+dir+'/sample.json';
-        const ejsPath = process.cwd()+'/templates/'+dir+'/index.ejs';
+        let logoPath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH+'/'+dir+CONSTANTS.PATHS.TEMPLATE.LOGO_PATH;
+        const sampleJsonPath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH+'/'+dir+CONSTANTS.PATHS.TEMPLATE.SAMPLE_JSON_PATH;
+        const ejsPath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH+'/'+dir+CONSTANTS.PATHS.TEMPLATE.EJS_PATH;
         
         //Check Weather Logo, Samole Data and EJS is presenr
         if(fs.existsSync(logoPath) && fs.existsSync(sampleJsonPath) && fs.existsSync(ejsPath)){
-            //Convert Image Path to Base64 Data 
-            const imgExt = logoPath.substring(logoPath.lastIndexOf("."),logoPath.length);
-            const base64Data = getImageBase64(logoPath);
-            logoPath = `data:${imgExt};base64,${base64Data}`;
-            
             //Created Template
-            const template = {sampleJsonPath,logoPath,ejsPath};
+            const template = {
+              sampleJsonPath:sampleJsonPath.replace(CONSTANTS.PATHS.PUBLIC_DIR,''),
+              logoPath:logoPath.replace(CONSTANTS.PATHS.PUBLIC_DIR,''),
+              ejsPath:ejsPath.replace(CONSTANTS.PATHS.PUBLIC_DIR,'')
+            };
             template['name'] = dir;
 
             //Added Template
@@ -46,7 +46,7 @@ const getTemplates = (rootFolderPath)=>{
 }
 
 export const GET = (request) =>{
-    const rootFolderPath = process.cwd()+'/templates';
+    const rootFolderPath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH;
     const jsonData = getTemplates(rootFolderPath);   
     return NextResponse.json(jsonData,{status:200});
 }

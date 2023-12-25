@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import Loader from '../Loader/Loader';
 import PreviewPage from '../PreviewPage/PreviewPage';
 import TemplateCard from '../TemplatesPage/TemplateCard';
+import { useRouter } from 'next/navigation';
 
 function AIForm({ template }) {
-
+    const router = useRouter();
     const [inputs, setInputs] = useState({ jobRole: "", description: "" });
     const [generatedData, setGeneratedData] = useState(undefined);
     const [loading, setLoading] = useState(false);
@@ -13,11 +14,20 @@ function AIForm({ template }) {
     const generateData = async () => {
         try {
             setLoading(true);
-            const req = await fetch(`/api/v1/generatedata?jobRole=${inputs.jobRole}&description=${inputs.description}&template=${template.name}`);
+            const {jobRole,description}=inputs;
+            const req = await fetch(`/api/v1/generatedata`,{
+                method:'POST',
+                body:JSON.stringify({jobRole,description,template:template.name})
+            });
             const res = await req.json();
             if (req.status == 200) {
                 setLoading(false);
-                setGeneratedData(res);
+                const content = JSON.stringify({templateName:template.name,jsonData:res});
+                const fileName = Date.now().toString()+'.buildifyX';
+                const reqCheckIn = await fetch('/api/v1/checkin',{method:'POST',body:JSON.stringify({content,fileName})});
+                if(reqCheckIn.status==201){
+                    router.push(`/buildifyX/builder?name=${fileName}`);
+                }
             }
         } catch (error) {
             setLoading(false);

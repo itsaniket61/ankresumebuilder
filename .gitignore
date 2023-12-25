@@ -11,3 +11,6 @@ temp/
 
 # Ignore the outputs directory
 outputs/
+
+#Ignore SetEnv
+.setenv
