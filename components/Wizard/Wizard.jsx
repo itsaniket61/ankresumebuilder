@@ -6,16 +6,14 @@ function Wizard() {
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
     
     const handleTemplateSelect = (template) => {
-        console.log(selectedTemplate);
         setSelectedTemplate(template);
     };
 
     return (
         <>
-            {selectedTemplate ?
-                <AIForm template={selectedTemplate} />
-                :
-                <TemplatePage onSelect={handleTemplateSelect} />}
+           <h1 className="text text-white mx-auto my-auto">
+                ANK Resume Builder
+           </h1>
         </>
     )
 }

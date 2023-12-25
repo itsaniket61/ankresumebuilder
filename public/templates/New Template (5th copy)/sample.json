@@ -1,0 +1,62 @@
+{
+    "profileImg":"Image URL...",
+    "firstName":"First Name here...",
+    "lastName":"Last Name here...",
+    "jobRole":"Job Role here...",
+    "introduction":"Introduction text here...",
+    "languages":[
+        {
+            "title":"Language Name...",
+            "score":"90%"
+        }
+    ],
+    "skills":[
+        {
+            "title":"Skill Name...",
+            "score":2
+        }
+    ],
+    "interests":[
+        {
+            "title":"Interest Name..."
+        }
+    ],
+    "education":[
+        {
+            "title":"Education 1 here..",
+            "description":"Education 1 description here..",
+            "duration":"2015-2016",
+            "schoolName":"School 1 Name here..."
+        },
+        {
+            "title":"Education 2 here..",
+            "description":"Education 2 description here..",
+            "duration":"2015-2016",
+            "schoolName":"School 2 Name here..."
+        }
+    ],
+    "contacts":[
+        {
+            "title":"+91 1234567890",
+            "icon":"Font Awsome Phone icon...."
+        },
+        {
+            "title":"abc@abc.com",
+            "description":"Font Awsome Email icon...."
+        }
+    ],
+    "experience":[
+        {
+            "title":"Experience 1 here..",
+            "duration":"2015-2016",
+            "description":"Experience 1 description here..",
+            "companyName":"Company 1 Name here..."
+        },
+        {
+            "title":"Experience 2 here..",
+            "duration":"2015-2016",
+            "description":"Experience 2 description here..",
+            "companyName":"Company 2 Name here..."
+        }
+    ]
+}

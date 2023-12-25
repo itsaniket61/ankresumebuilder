@@ -1,14 +1,16 @@
 import puppeteer from 'puppeteer';
 const fs = require('fs');
 import { getBlobCode } from '../BlobManager/blobManager';
+import { CONSTANTS } from '@/app/variables/Constatnts';
 
 const generatePDF = async (htmlContent, outputPath) => {
-    const browser = await puppeteer.launch({headless:"new"});
+    const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox'] });
     const page = await browser.newPage();
   
     // Set the content and render the PDF
     await page.setContent(htmlContent);
-    const outputPdfsDir = process.cwd()+"/outputs/PDFs/";
+    
+    const outputPdfsDir = CONSTANTS.PATHS.OUTPUT_PDF_DIR;
     if(!fs.existsSync(outputPdfsDir)){
       fs.mkdirSync(outputPdfsDir,{recursive:true});
     }
