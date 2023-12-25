@@ -1,12 +1,16 @@
 import { google } from 'googleapis';
 import fs from 'fs';
-import credentials from './creds.json';
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 const TOKEN_PATH = process.cwd()+'/services/storage/gdrive/token.json';
 
-const { client_secret, client_id, redirect_uris } = credentials.web;
-const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+const gdriveCreds = {
+  client_secret:process.env.GDRIVE_CLIENT_SECRET,
+  client_id:process.env.GDRIVE_CLIENT_ID,
+  redirect_uris:process.env.GDRIVE_REDIRECT_URL
+}
+const { client_secret, client_id, redirect_uris } = gdriveCreds;
+const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris);
 
 
 const authorize = () => {
