@@ -19,6 +19,8 @@ WORKDIR /app
 
 # Copy both package.json and package-lock.json (if exists)
 COPY package*.json ./
+COPY tailwind.config.js ./
+COPY postcss.config.js ./
 
 # Install dependencies
 RUN npm install yarn
