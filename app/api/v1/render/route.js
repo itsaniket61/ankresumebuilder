@@ -1,3 +1,4 @@
+import { CONSTANTS } from "@/app/variables/Constatnts";
 import CustomLogger from "@/helpers/Log/CustomLogger";
 import {renderEjsFile} from "@/helpers/Render/EJSRender";
 import { generatePDF } from "@/helpers/Render/PDFRender";
@@ -8,7 +9,8 @@ export const POST = async(request)=>{
     const logger = new CustomLogger();
     try {
         const {template,data} = await request.json();
-        const html = renderEjsFile(process.cwd()+"/public/templates/"+template,data);
+        const ejsPath =CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH+"/"+template;
+        const html = renderEjsFile(ejsPath+'/index.ejs',data);
         logger.debug(html);
         const blobCode = await generatePDF(html,'output.pdf');
         logger.debug(`Blob generated is ${blobCode}`);

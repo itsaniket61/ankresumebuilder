@@ -1,26 +1,42 @@
 #!/bin/bash
-echo "Enter Docker Username : "
-read DOCKER_USERNAME
 
-echo "Enter Docker Password : "
-read -s DOCKER_PASSWORD
+# Check if .setenv file exists
+if [ -f .setenv ]; then
+    source .setenv
+else
+    echo "Creating .setenv file..."
+    
+    # Prompt user for Docker credentials
+    echo -n "Enter Docker Username : "
+    read DOCKER_USERNAME
 
-echo "Enter Image Name : "
-read DOCKER_IMAGE_NAME
+    echo -n "Enter Docker Password : "
+    read -s DOCKER_PASSWORD
 
-echo "Enter Image Tag : "
-read DOCKER_IMAGE_TAG
+    # Create .setenv file with Docker credentials
+    echo "DOCKER_USERNAME=$DOCKER_USERNAME" > .setenv
+    echo "DOCKER_PASSWORD=$DOCKER_PASSWORD" >> .setenv
 
+    echo -e "\n.setenv file created successfully."
+fi
+
+# Check if DOCKER_USERNAME and DOCKER_PASSWORD are set
+if [ -z "$DOCKER_USERNAME" ] || [ -z "$DOCKER_PASSWORD" ]; then
+    echo "Error: DOCKER_USERNAME and DOCKER_PASSWORD must be set in the .setenv file."
+    exit 1
+fi
+
+# Docker login
 sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+echo "Docker login Successful."
 
-sudo docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+# Continue with the rest of the script
+export DOCKER_IMAGE_NAME="ankresumebuilder"
 
-sudo docker run -d \
-                -e "AI_API_KEY=AIzaSyAb-Ce0fzOjT5WmipYQ1rzkmUFqTTxL-Dw" \
-                -e "ACTIVE_PROFILE=prod" \
-                -e "SECRET_KEY=Pta-nhii-yrr" \
-                -e "HOST_URL=https://qt7vdt4g-3000.inc1.devtunnels.ms"\
-                -e "MAX_AI_LENGTH=500" \
-                -e "BLOB_EXPIRY=60"\
-                -p 3000:3000 \
-                $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+export DOCKER_IMAGE_TAG="latest"
+
+# Pull the Docker image
+docker-compose pull $DOCKER_IMAGE_NAME
+
+# Run the Docker container using docker-compose
+docker-compose up -d

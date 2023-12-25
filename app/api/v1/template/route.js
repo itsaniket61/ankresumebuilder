@@ -1,39 +1,27 @@
+import { CONSTANTS } from "@/app/variables/Constatnts";
 import getQueryParams from "@/helpers/Request/GetQueryParams";
 import fs from "fs"
 import { NextResponse } from "next/server";
 
-function getImageBase64(filePath) {
-    try {
-      // Read the image file synchronously
-      const imageData = fs.readFileSync(filePath);
-  
-      // Convert the binary data to base64
-      const base64Data = imageData.toString('base64');
-  
-      return base64Data;
-    } catch (error) {
-      console.error('Error reading or converting the image:', error);
-      return null;
-    }
-  }
-
-const getTemplate = (rootFolderPath,templateName)=>{
-    
-    const publicDir = process.cwd()+'/public';
-        // Prepare paths of all template dependents
-    const logoPath = '/templates/'+templateName+'/logo.jpg';
-    const sampleJsonPath = '/templates/'+templateName+'/sample.json';
-    const ejsPath = '/templates/'+templateName+'/index.ejs';
+const getTemplate = (templateName)=>{
+    // Prepare paths of all template dependents
+    const logoPath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH+'/'+templateName+CONSTANTS.PATHS.TEMPLATE.LOGO_PATH;
+    const sampleJsonPath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH+'/'+templateName+CONSTANTS.PATHS.TEMPLATE.SAMPLE_JSON_PATH;
+    const ejsPath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH+'/'+templateName+CONSTANTS.PATHS.TEMPLATE.EJS_PATH;
         
     //Check Weather Logo, Samole Data and EJS is presenr
-    if(fs.existsSync(publicDir+logoPath) && fs.existsSync(publicDir+sampleJsonPath) && fs.existsSync(publicDir+ejsPath)){
+    if(fs.existsSync(logoPath) && fs.existsSync(sampleJsonPath) && fs.existsSync(ejsPath)){
         
-      const sampleJsonDataFileContent = fs.readFileSync(publicDir+sampleJsonPath,{encoding:'utf-8'});
+      const sampleJsonDataFileContent = fs.readFileSync(sampleJsonPath,{encoding:'utf-8'});
 
         const sampleJsonData = JSON.parse(sampleJsonDataFileContent);
 
         //Created Template
-        const template = {sampleJsonPath,logoPath,ejsPath,sampleJsonData};
+        const template = {
+            sampleJsonPath:sampleJsonPath.replace(CONSTANTS.PATHS.PUBLIC_DIR,''),
+            logoPath:logoPath.replace(CONSTANTS.PATHS.PUBLIC_DIR,''),
+            ejsPath:ejsPath.replace(CONSTANTS.PATHS.PUBLIC_DIR,'')
+        };
         template['name'] = templateName;
 
         //Added Template
@@ -44,7 +32,6 @@ const getTemplate = (rootFolderPath,templateName)=>{
 
 export const GET = (request) =>{
     const {templateName} = getQueryParams(request);
-    const rootFolderPath = process.cwd()+'/public/templates';
-    const jsonData = getTemplate(rootFolderPath,templateName);   
+    const jsonData = getTemplate(templateName);   
     return NextResponse.json(jsonData,{status:200});
 }

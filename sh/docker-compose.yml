@@ -1,0 +1,14 @@
+version: '3'
+services:
+  ankresumebuilder: # Replace with a suitable name for your service
+    image: "itsaniket61/ankresumebuilder:${DOCKER_IMAGE_TAG}"
+    container_name: ankresumebuilder
+    ports:
+      - "8081:8081"
+    environment:
+      - AI_API_KEY=AIzaSyAb-Ce0fzOjT5WmipYQ1rzkmUFqTTxL-Dw
+      - ACTIVE_PROFILE=prod
+      - SECRET_KEY=ani-secret-key
+      - HOST_URL=http://ankresumebuilder:8081
+      - MAX_AI_LENGTH=500
+      - BLOB_EXPIRY=60

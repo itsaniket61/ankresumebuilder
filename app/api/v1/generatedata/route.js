@@ -1,3 +1,4 @@
+import { CONSTANTS } from "@/app/variables/Constatnts";
 import CustomLogger from "@/helpers/Log/CustomLogger";
 import getQueryParams from "@/helpers/Request/GetQueryParams"
 import fs from "fs";
@@ -5,13 +6,13 @@ import { NextResponse } from "next/server";
 
 const hostUrl = process.env.HOST_URL;
 const logger = new CustomLogger();
-export const GET=async(request)=>{
+export const POST=async(request)=>{
     try {
-        const {jobRole,description,template} = getQueryParams(request);
+        const {jobRole,description,template} = await request.json();
     const additionalInfo = description;
 
     //Read Sample JSON Data
-    const sampleJsonFilePath = process.cwd()+'/public/templates/'+template+'/sample.json';
+    const sampleJsonFilePath = CONSTANTS.PATHS.TEMPLATE.TEMPLATES_DIR_PATH + `/${template}/` + CONSTANTS.PATHS.TEMPLATE.SAMPLE_JSON_PATH;
     const fileContent = fs.readFileSync(sampleJsonFilePath,'utf-8');
     const sampleJSON = JSON.parse(fileContent);
 
