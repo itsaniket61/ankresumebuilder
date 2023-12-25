@@ -23,6 +23,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+RUN npm install tailwindcss@latest postcss@latest autoprefixer@latest
+RUN npx tailwindcss init
+
 # Copy the rest of the application code
 COPY . .
 
