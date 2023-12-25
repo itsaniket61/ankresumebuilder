@@ -8,7 +8,9 @@ services:
     environment:
       - AI_API_KEY=AIzaSyAb-Ce0fzOjT5WmipYQ1rzkmUFqTTxL-Dw
       - ACTIVE_PROFILE=prod
-      - SECRET_KEY=ani-secret-key
+      - SECRET_KEY=aniket-secret-key
       - HOST_URL=http://ankresumebuilder:8081
       - MAX_AI_LENGTH=500
-      - BLOB_EXPIRY=60
+      - PORT=8081
+      - BLOB_EXPIRY=10
+      - STORAGE_CLASS=gdrive
