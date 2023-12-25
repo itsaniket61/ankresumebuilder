@@ -21,12 +21,13 @@ function AIForm({ template }) {
             });
             const res = await req.json();
             if (req.status == 200) {
-                setLoading(false);
                 const content = JSON.stringify({templateName:template.name,jsonData:res});
-                const fileName = Date.now().toString()+'.buildifyX';
+                let fileName = Date.now().toString()+'.buildifyX';
                 const reqCheckIn = await fetch('/api/v1/checkin',{method:'POST',body:JSON.stringify({content,fileName})});
                 if(reqCheckIn.status==201){
-                    router.push(`/buildifyX/builder?name=${fileName}`);
+                    setLoading(false);
+                    const {fileName,fileId} = await reqCheckIn.json();
+                    router.push(`/buildifyX/builder?fileId=${fileId}&name=${fileName}`);
                 }
             }
         } catch (error) {
