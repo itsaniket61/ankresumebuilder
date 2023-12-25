@@ -21,10 +21,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install -g yarn
 
-RUN npm install tailwindcss@latest postcss@latest autoprefixer@latest
-RUN npx tailwindcss init
+RUN yarn
 
 # Copy the rest of the application code
 COPY . .
@@ -32,6 +31,6 @@ COPY . .
 EXPOSE 8081
 
 # Build the application (if needed)
-RUN npm run build
+RUN yarn build
 
-CMD npm run start
+CMD yarn start
