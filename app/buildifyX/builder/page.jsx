@@ -10,12 +10,12 @@ function Builder() {
   const router = useRouter();
   const [jsonData, setJsonData] = useState(undefined);
   const fileName = searchParams.get('name');
-      
+  const fileId = searchParams.get('fileId');
 
   useEffect(() => {
     const getTemplate = async () => {
       if (fileName) {
-        const req = await fetch(`/api/v1/checkout?fileName=${fileName}`);
+        const req = await fetch(`/api/v1/checkout?fileName=${fileName}&fileId=${fileId}`);
         const {content} = await req.json();
         const checkedOutFileData = JSON.parse(content);
         setJsonData({ template: checkedOutFileData.templateName, data: checkedOutFileData.jsonData});
