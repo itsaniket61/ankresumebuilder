@@ -19,6 +19,11 @@ WORKDIR /app
 
 # Copy both package.json and package-lock.json (if exists)
 COPY package*.json ./
+
+RUN npm uninstall tailwindcss postcss autoprefixer
+RUN npm install tailwindcss@latest postcss@latest autoprefixer@latest
+
+
 COPY tailwind.config.js ./
 COPY postcss.config.js ./
 
