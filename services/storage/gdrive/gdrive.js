@@ -1,17 +1,21 @@
 import { google } from 'googleapis';
 import fs from 'fs';
-import credentials from './creds.json';
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 const TOKEN_PATH = process.cwd()+'/services/storage/gdrive/token.json';
 
-const { client_secret, client_id, redirect_uris } = credentials.web;
-const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+const gdriveCreds = {
+  client_secret:process.env.GDRIVE_CLIENT_SECRET,
+  client_id:process.env.GDRIVE_CLIENT_ID,
+  redirect_uris:process.env.GDRIVE_REDIRECT_URL
+}
 
 
 const authorize = () => {
   // Check if we have previously stored a token.
   try {
+    const { client_secret, client_id, redirect_uris } = gdriveCreds;
+    const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris);
     const token = fs.readFileSync(TOKEN_PATH);
     oAuth2Client.setCredentials(JSON.parse(token));
     return oAuth2Client;
@@ -21,6 +25,8 @@ const authorize = () => {
 };
 
 const getNewToken = () => {
+  const { client_secret, client_id, redirect_uris } = gdriveCreds;
+  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris);
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: SCOPES,
@@ -30,6 +36,8 @@ const getNewToken = () => {
 };
 
 const writeToken = (code) =>{
+  const { client_secret, client_id, redirect_uris } = gdriveCreds;
+  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris);
   return new Promise((resolve, reject) => {
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return reject(`Error while trying to retrieve access token: ${err}`);
