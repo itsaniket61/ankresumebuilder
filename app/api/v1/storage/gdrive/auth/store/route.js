@@ -6,7 +6,7 @@ export const GET = async (request) =>{
     const {code} = getQueryParams(request);
     if(code){
         await writeToken(code);
-        return NextResponse.redirect(process.env.HOST_URL);
+        return NextResponse.redirect(process.env.WEB_URL);
     }
-    return NextResponse.redirect(process.env.HOST_URL+'/error');
+    return NextResponse.redirect(process.env.WEB_URL+'/error');
 }

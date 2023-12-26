@@ -1,16 +1,21 @@
 version: '3'
+
 services:
-  ankresumebuilder: # Replace with a suitable name for your service
-    image: "itsaniket61/ankresumebuilder:${DOCKER_IMAGE_TAG}"
+  ankresumebuilder:
     container_name: ankresumebuilder
+    image: itsaniket61/ankresumebuilder:${DOCKER_IMAGE_TAG}
     ports:
-      - "443:443"
+      - "$APP_PORT:$APP_PORT"
     environment:
       - AI_API_KEY=AIzaSyAb-Ce0fzOjT5WmipYQ1rzkmUFqTTxL-Dw
       - ACTIVE_PROFILE=prod
       - SECRET_KEY=aniket-secret-key
-      - HOST_URL=http://ankresumebuilder:8081
+      - HOST_URL=http://0.0.0.0:$APP_PORT
       - MAX_AI_LENGTH=500
-      - PORT=${APP_PORT}
-      - BLOB_EXPIRY=10
+      - PORT=$APP_PORT
+      - BLOB_EXPIRY=60
       - STORAGE_CLASS=gdrive
+      - GDRIVE_CLIENT_SECRET=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
+      - GDRIVE_CLIENT_ID=1003549797148-h2qro5mbkuhgr02n3i4bcha1jebhtbo1.apps.googleusercontent.com
+      - GDRIVE_REDIRECT_URL=https://qt7vdt4g-8081.inc1.devtunnels.ms/api/v1/storage/gdrive/auth/store
+    restart: always
