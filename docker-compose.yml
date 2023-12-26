@@ -16,7 +16,7 @@ services:
       - PORT=8081
       - BLOB_EXPIRY=60
       - STORAGE_CLASS=gdrive
-      - GDRIVE_CLIENT_SECRET=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
-      - GDRIVE_CLIENT_ID=1003549797148-h2qro5mbkuhgr02n3i4bcha1jebhtbo1.apps.googleusercontent.com
-      - GDRIVE_REDIRECT_URL=http://localhost:8081/api/v1/storage/gdrive/auth/store    
+      - GDRIVE_CLIENT_SECRET="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"
+      - GDRIVE_CLIENT_ID="1003549797148-h2qro5mbkuhgr02n3i4bcha1jebhtbo1.apps.googleusercontent.com"
+      - GDRIVE_REDIRECT_URL="http://localhost:8081/api/v1/storage/gdrive/auth/store"
     restart: always
