@@ -5,4 +5,4 @@ mkdir storage
 
 echo "Storage Folder Created..."
 
-yarn start
+yarn next start -p $PORT

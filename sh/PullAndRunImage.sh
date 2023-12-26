@@ -35,6 +35,11 @@ export DOCKER_IMAGE_NAME="ankresumebuilder"
 
 export DOCKER_IMAGE_TAG="latest"
 
+echo "Enter PORT for App"
+read PORT
+
+export APP_PORT=$PORT
+
 # Pull the Docker image
 docker-compose pull $DOCKER_IMAGE_NAME
 
