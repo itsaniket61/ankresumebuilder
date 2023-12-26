@@ -44,4 +44,4 @@ EXPOSE 8081
 # Build the application (if needed)
 RUN yarn build
 
-CMD ./start.sh
+CMD ["sh","./start.sh"]
