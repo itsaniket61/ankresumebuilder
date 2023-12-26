@@ -39,8 +39,6 @@ COPY . .
 
 RUN chmod +x start.sh
 
-EXPOSE 8081
-
 # Build the application (if needed)
 RUN yarn build
 
