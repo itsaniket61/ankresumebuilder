@@ -1,0 +1,13 @@
+name: Docker ANK Resume Builder Image CI/CD Dev
+on:
+    workflow_dispatch: 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: 🚀 SSH into remote server and load Run Docker Container
+        run: |
+          sshpass -p ${{ secrets.REMOTE_SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.REMOTE_SERVER_PORT }} ${{ secrets.REMOTE_SERVER_USERNAME }}@${{ secrets.REMOTE_SERVER_HOST }} "cd ANK/sh && ./PullAndRunImage.sh"
