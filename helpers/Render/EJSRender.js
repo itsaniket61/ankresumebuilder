@@ -1,7 +1,7 @@
 import fs from 'fs';
 import ejs from 'ejs';
 import CustomLogger from '../Log/CustomLogger';
-import { CONSTANTS } from '@/app/variables/Constatnts';
+import { CONSTANTS } from '@/variables/Constatnts';
 
 export default function renderEjsFile(filePath, data) {
     const logger = new CustomLogger();

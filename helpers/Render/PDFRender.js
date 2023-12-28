@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 const fs = require('fs');
 import { getBlobCode } from '../BlobManager/blobManager';
-import { CONSTANTS } from '@/app/variables/Constatnts';
+import { CONSTANTS } from '@/variables/Constatnts';
 
 const generatePDF = async (htmlContent, outputPath) => {
     const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox'] });
