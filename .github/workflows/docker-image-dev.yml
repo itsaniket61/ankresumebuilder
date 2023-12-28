@@ -11,10 +11,10 @@ jobs:
       - name: 🔄 Checkout code
         uses: actions/checkout@v3
 
-      - name: 🏗️ Build the Docker image with latest tag
+      - name: 📦 Build the Docker image with latest tag
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/ankresumebuilder:latest
 
-      - name: 🏗️ Build the Docker image with date tag
+      - name: 📦 Build the Docker image with date tag
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/ankresumebuilder:dev-$(date '+%Y%m%d')
       
       - name: 🔒 Log in to Docker registry
@@ -28,3 +28,10 @@ jobs:
       - name: 🚀 Push Docker image to registry
         if: success() && github.event_name == 'push'
         run: docker push ${{ secrets.DOCKER_USERNAME }}/ankresumebuilder:dev-$(date '+%Y%m%d')
+      
+      - name: 📦 Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: 🚀 SSH into remote server and load Run Docker Container
+        run: |
+          sshpass -p ${{ secrets.REMOTE_SERVER_PASSWORD }} ssh -o StrictHostKeyChecking=no -p ${{ secrets.REMOTE_SERVER_PORT }} ${{ secrets.REMOTE_SERVER_USERNAME }}@${{ secrets.REMOTE_SERVER_HOST }} "cd ANK/sh && ./PullAndRunImage.sh"
