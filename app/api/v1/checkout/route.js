@@ -1,4 +1,4 @@
-import { CONSTANTS } from '@/app/variables/Constatnts';
+import { CONSTANTS } from '@/variables/Constatnts';
 import getQueryParams from '@/helpers/Request/GetQueryParams';
 import fs from 'fs';
 import { NextResponse } from 'next/server';
@@ -18,6 +18,9 @@ export const GET = async(request) =>{
             }else{
                 console.log("Failed to uploaded to "+storage);
             }
+        }else{
+            const fileContent = fs.readFileSync(CONSTANTS.PATHS.STORAGE.ASSETS_DIR_PATH+'/'+fileName,{encoding:'utf-8'});
+            return NextResponse.json({content:fileContent},{status:200});
         }
         
     } catch (error) {

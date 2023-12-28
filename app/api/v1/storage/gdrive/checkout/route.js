@@ -1,4 +1,4 @@
-import { CONSTANTS } from '@/app/variables/Constatnts';
+import { CONSTANTS } from '@/variables/Constatnts';
 import getQueryParams from '@/helpers/Request/GetQueryParams';
 import { authorize, readFileFromDrive } from '@/services/storage/gdrive/gdrive';
 import fs from 'fs';

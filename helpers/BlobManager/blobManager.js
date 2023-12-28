@@ -2,7 +2,7 @@ import fs from 'fs';
 import multer from 'multer';
 import path from 'path';
 import crypto from 'crypto';
-import { CONSTANTS } from '@/app/variables/Constatnts';
+import { CONSTANTS } from '@/variables/Constatnts';
 
 const algorithm = 'aes-256-ctr';
 const secretKey = process.env.SECRET_KEY; 

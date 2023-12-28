@@ -1,4 +1,4 @@
-import { CONSTANTS } from "@/app/variables/Constatnts";
+import { CONSTANTS } from "@/variables/Constatnts";
 import CustomLogger from "@/helpers/Log/CustomLogger";
 import {renderEjsFile} from "@/helpers/Render/EJSRender";
 import { generatePDF } from "@/helpers/Render/PDFRender";
