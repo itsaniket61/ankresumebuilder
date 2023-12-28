@@ -1,4 +1,4 @@
-name: Docker ANK Resume Builder Image CI/CD Dev
+name: Deploy Dev Image to Homeserver
 on:
     workflow_dispatch: 
 jobs:
