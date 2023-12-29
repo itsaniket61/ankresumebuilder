@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 const fs = require('fs');
 import { getBlobCode } from '../BlobManager/blobManager';
-import { CONSTANTS } from '@/app/variables/Constatnts';
+import { CONSTANTS } from '@/variables/Constatnts';
 
 const generatePDF = async (htmlContent, outputPath) => {
     const browser = await puppeteer.launch({ headless: "new", args: ['--no-sandbox'] });
@@ -24,4 +24,17 @@ const generatePDF = async (htmlContent, outputPath) => {
     return blobCode;
 };
 
-export {generatePDF};
+const generateHTML = async (htmlContent,outputPath) =>{
+  const outputHtmlsDir = CONSTANTS.PATHS.OUTPUT_HTML_DIR;
+  if(!fs.existsSync(outputHtmlsDir)){
+    await fs.mkdirSync(outputHtmlsDir,{recursive:true});
+  }
+  const opp = outputHtmlsDir+Date.now().toString()+"-"+outputPath
+  await fs.writeFileSync(opp,htmlContent);
+  const ins = await fs.createReadStream(opp);
+  const blobCode = await getBlobCode(ins,'application/html');
+  fs.rmSync(opp);
+  return blobCode;
+}
+
+export {generatePDF,generateHTML};

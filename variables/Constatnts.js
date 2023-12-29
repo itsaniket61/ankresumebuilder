@@ -3,6 +3,7 @@ export const CONSTANTS = {
     PATHS:{
         PUBLIC_DIR:cwd+'/public',
         OUTPUT_PDF_DIR:cwd+"/outputs/PDFs",
+        OUTPUT_HTML_DIR:cwd+"/outputs/HTMLs",
         BLOB_TEMP_DIR:cwd+`/blobTemp`,
         TEMPLATE:{
             TEMPLATES_DIR_PATH:cwd+"/public/templates",

@@ -1,4 +1,4 @@
-import { CONSTANTS } from "@/app/variables/Constatnts";
+import { CONSTANTS } from "@/variables/Constatnts";
 import CustomLogger from "@/helpers/Log/CustomLogger";
 import getQueryParams from "@/helpers/Request/GetQueryParams"
 import fs from "fs";

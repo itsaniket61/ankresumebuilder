@@ -1,4 +1,4 @@
-import { CONSTANTS } from '@/app/variables/Constatnts';
+import { CONSTANTS } from '@/variables/Constatnts';
 import fs from 'fs';
 import { NextResponse } from 'next/server';
 
@@ -24,9 +24,11 @@ export const POST = async (request) =>{
                 return NextResponse.json({ fileId,fileName },{status:201});
             }else{
                 console.log("Failed to uploaded to "+storage);
+                return NextResponse.json({message:"Failed to uploaded to "+storage},{status:500});
             }
+        }else{
+            return NextResponse.json({ fileName },{status:201});
         }
-        return NextResponse.json({ reqStorage },{status:201});
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: error.message },{status:500});

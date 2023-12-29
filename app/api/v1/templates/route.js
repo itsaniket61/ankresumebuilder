@@ -1,4 +1,4 @@
-import { CONSTANTS } from "@/app/variables/Constatnts";
+import { CONSTANTS } from "@/variables/Constatnts";
 import fs from "fs"
 import { NextResponse } from "next/server";
 
