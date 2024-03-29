@@ -15,11 +15,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-JPLZR1JQXN"></Script>
       <Script>
-        window.dataLayer = window.dataLayer || [];
+        {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-JPLZR1JQXN');
+        gtag('config', 'G-JPLZR1JQXN');`}
       </Script>
       <body className={inter.className+" bg-gray-950 "}>{children}</body>
     </html>
